@@ -1,57 +1,41 @@
-# Ant Design Pro
+# 环境
+* windows10
+* umi@3.x
+* umi-plugin-qiankun@latest
+* qiankun@latest
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+# config/config.ts配置
 
-## Environment Prepare
-
-Install `node_modules`:
-
-```bash
-npm install
+```
+...
+  qiankun: {
+    master: {
+      sandbox: true,
+      apps: [
+        {
+          name: 'app1',
+          entry: '//localhost:17001',
+        },
+        {
+          name: 'app2',
+          entry: '//localhost:17002',
+        },
+      ],
+    },
+  },
+...
 ```
 
-or
-
-```bash
-yarn
+# config/routes.ts配置
 ```
+export default [
+  { path: '/welcome', name: 'welcome', icon: 'smile', component: './Welcome' },
+  { path: '/app1', name: 'app1', microApp: 'app1', microAppProps: { errorBoundary: () => '错啦' } },
+  { path: '/app2', name: 'app2', microApp: 'app2', microAppProps: { errorBoundary: () => '错啦' } },
+  { path: '/', redirect: '/app1' },
+  {
+    component: './404',
+  },
+];
 
-## Provided Scripts
-
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
-
-Scripts provided in `package.json`. It's safe to modify or add additional script:
-
-### Start project
-
-```bash
-npm start
 ```
-
-### Build project
-
-```bash
-npm run build
-```
-
-### Check code style
-
-```bash
-npm run lint
-```
-
-You can also use script to auto fix some lint error:
-
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
